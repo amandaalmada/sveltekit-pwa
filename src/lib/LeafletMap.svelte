@@ -48,7 +48,7 @@
 						[-25.2507, -57.604]
 					],
 					{
-						color: 'red',
+						color: 'blue',
 						fillColor: '#f03',
 						fillOpacity: 0.5
 					}
