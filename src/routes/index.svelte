@@ -1,1 +1,7 @@
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<script>
+	import LeafletMap from '$lib/LeafletMap.svelte';
+</script>
+
+<main>
+	<LeafletMap />
+</main>
