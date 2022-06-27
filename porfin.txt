@@ -1,0 +1,14 @@
+import pyrebase
+
+firebaseConfig={
+  "apiKey": "AIzaSyAxtx_E08rgGWigQs4BrP1us_2Kijl89jw",
+  "authDomain": "okymapp-e42bb.firebaseapp.com",
+  "projectId": "okymapp-e42bb",
+  "storageBucket": "okymapp-e42bb.appspot.com",
+  "messagingSenderId": "147080091155",
+  "appId": "1:147080091155:web:bad9f99878aea5cc1811e6",
+  "measurementId": "G-NQY4L06HWM",
+  "databaseURL": "https://okymapp.firebaseio.com"} 
+
+firebase=pyrebase.initialize_app(firebaseConfig)
+auth=firebase.auth()
