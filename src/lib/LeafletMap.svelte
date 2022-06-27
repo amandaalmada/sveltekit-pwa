@@ -20,6 +20,19 @@
 				.addTo(map)
 				.bindPopup('Usted se encuentra aquí.<br> Haga click derecho para guardar.')
 				.openPopup();
+
+			leaflet
+				.polygon([
+					[-25.2518, -57.6033],
+					[-25.2528, -57.6018],
+					[-25.2543, -57.6014],
+					[-25.2536, -57.5978],
+					[-25.2525, -57.5984],
+					[-25.2487, -57.5995],
+					[-25.2497, -57.6025],
+					[-25.2507, -57.604]
+				])
+				.addTo(map);
 		}
 	});
 </script>
