@@ -2,11 +2,25 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/env';
 
+	function getUserLocation() {
+		return new Promise((resolve, reject) => {
+			try {
+				navigator.geolocation.getCurrentPosition((result) => {
+					let userLocation = [result.coords.latitude, result.coords.longitude];
+					resolve(userLocation);
+				});
+			} catch (error) {
+				resolve('Error getting user location');
+			}
+		});
+	}
+
 	onMount(async () => {
 		if (browser) {
 			const leaflet = await import('leaflet');
+			const userLocation = await getUserLocation();
 
-			const map = leaflet.map('map').setView([-25.302241662664127, -57.58034997736135], 13);
+			const map = leaflet.map('map').setView(userLocation, 13);
 
 			leaflet
 				.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -16,7 +30,7 @@
 				.addTo(map);
 
 			leaflet
-				.marker([-25.302241662664127, -57.58034997736135])
+				.marker(userLocation)
 				.addTo(map)
 				.bindPopup('Usted se encuentra aquí.<br> Haga click derecho para guardar.')
 				.openPopup();
