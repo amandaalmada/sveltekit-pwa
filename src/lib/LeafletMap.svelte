@@ -47,7 +47,7 @@
 				]
 			},
 			{
-				name: 'Banhado Tacumbu',
+				name: 'Bañado Tacumbu',
 				polygons: [
 					[-25.3016, -57.6628],
 					[-25.3015, -57.6658],
@@ -65,7 +65,7 @@
 				]
 			},
 			{
-				name: 'Banhado Santa Ana',
+				name: 'Bañado Santa Ana',
 				polygons: [
 					[-25.3161, -57.6607],
 					[-25.3196, -57.6571],
