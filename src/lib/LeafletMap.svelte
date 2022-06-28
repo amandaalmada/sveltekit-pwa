@@ -18,9 +18,12 @@
 	onMount(async () => {
 		if (browser) {
 			const leaflet = await import('leaflet');
+			const markercluster = await import('leaflet.markercluster');
+			let markers = new markercluster.MarkerClusterGroup();
+			console.log(markers);
 			const userLocation = await getUserLocation();
 
-			const map = leaflet.map('map').setView(userLocation, 13);
+			const map = leaflet.map('map').setView(userLocation, 12.5);
 
 			leaflet
 				.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -50,7 +53,7 @@
 					{
 						color: 'red',
 						fillColor: '#f03',
-						fillOpacity: 0.5
+						fillOpacity: 0.3
 					}
 				)
 				.addTo(map);
@@ -73,7 +76,7 @@
 					{
 						color: 'red',
 						fillColor: '#f03',
-						fillOpacity: 0.5
+						fillOpacity: 0.3
 					}
 				)
 				.addTo(map);
@@ -98,7 +101,7 @@
 					{
 						color: 'red',
 						fillColor: '#f03',
-						fillOpacity: 0.5
+						fillOpacity: 0.3
 					}
 				)
 				.addTo(map);
@@ -124,7 +127,7 @@
 					{
 						color: 'red',
 						fillColor: '#f03',
-						fillOpacity: 0.5
+						fillOpacity: 0.3
 					}
 				)
 				.addTo(map);
@@ -146,7 +149,7 @@
 					{
 						color: 'red',
 						fillColor: '#f03',
-						fillOpacity: 0.5
+						fillOpacity: 0.3
 					}
 				)
 				.addTo(map);
