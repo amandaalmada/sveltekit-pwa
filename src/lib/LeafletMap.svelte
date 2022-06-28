@@ -100,7 +100,6 @@
 			}
 		];
 	}
-
 	onMount(async () => {
 		if (browser) {
 			const leaflet = await import('leaflet');
@@ -122,6 +121,30 @@
 				.marker(userLocation)
 				.addTo(map)
 				.bindPopup('Usted se encuentra aquí.<br> Haga click para registrar su ubicación.')
+				.openPopup();
+
+			leaflet
+				.marker([-25.29931, -57.657385])
+				.addTo(map)
+				.bindPopup('1ra Division de Infanteria')
+				.openPopup();
+
+			leaflet
+				.marker([-25.290023, -57.629667])
+				.addTo(map)
+				.bindPopup('Refugio de la SEN')
+				.openPopup();
+
+			leaflet
+				.marker([-25.295046, -57.610972])
+				.addTo(map)
+				.bindPopup('Regimiento de infanteria Nro 14')
+				.openPopup();
+
+			leaflet
+				.marker([-25.282707, -57.562389])
+				.addTo(map)
+				.bindPopup('Ministerio de la Defensa Publica-Charlotte')
 				.openPopup();
 
 			const zones = getZones();
