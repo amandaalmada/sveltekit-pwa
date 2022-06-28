@@ -7,16 +7,16 @@
 
 // proper initialization
 if ('undefined' === typeof window) {
-	importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-app-compat.js');
-	importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-messaging-compat.js');
+	importScripts('https://www.gstatic.com/firebasejs/9.8.4/firebase-app-compat.js');
+	importScripts('https://www.gstatic.com/firebasejs/9.8.4/firebase-messaging-compat.js');
 
 	firebase.initializeApp({
-		apiKey: 'AIzaSyBFydIe5L1lnSRnFUgpqEfO6ngPVJDQQA4',
-		authDomain: 'group-maker-2.firebaseapp.com',
-		projectId: 'group-maker-2',
-		storageBucket: 'group-maker-2.appspot.com',
-		messagingSenderId: '773436964462',
-		appId: '1:773436964462:web:c0679e3e83cda6cb67707f'
+		apiKey: 'AIzaSyDpE2oR8ey_mus_vtd4mb0DVc77PrWwavc',
+		authDomain: 'auth-test-9e6bd.firebaseapp.com',
+		projectId: 'auth-test-9e6bd',
+		storageBucket: 'auth-test-9e6bd.appspot.com',
+		messagingSenderId: '503637452547',
+		appId: '1:503637452547:web:21932048bd91d6ee36eb36'
 	});
 
 	const messaging = firebase.messaging();
@@ -57,9 +57,9 @@ if ('undefined' === typeof window) {
 	messaging.onBackgroundMessage(function (payload) {
 		console.log('[firebase-messaging-sw.js] Received background message ', payload);
 		// Customize notification here
-		const notificationTitle = 'Background Message Title';
+		const notificationTitle = payload.notification.title;
 		const notificationOptions = {
-			body: 'Background Message body.',
+			body: payload.notification.body,
 			icon: '/firebase-logo.png'
 		};
 
