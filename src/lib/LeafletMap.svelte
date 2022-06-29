@@ -15,6 +15,12 @@
 		});
 	}
 
+	// function inZone(e) {
+	// 	let contained = polygons.contains(e.latlng);
+	// 	let message = contained ? 'This is inside the polygon!' : 'This is not inside the polygon.';
+	// 	popup.setLatLng(e.latlng).setContent(message).openOn(map);
+	// }
+
 	function getZones() {
 		return [
 			{
@@ -103,6 +109,9 @@
 	onMount(async () => {
 		if (browser) {
 			const leaflet = await import('leaflet');
+			await import(
+				'https://rawgit.com/hayeswise/Leaflet.PointInPolygon/master/wise-leaflet-pip.js'
+			);
 			const markercluster = await import('leaflet.markercluster');
 			let markers = new markercluster.MarkerClusterGroup();
 			console.log(markers);
@@ -147,9 +156,17 @@
 				.bindPopup('Ministerio de la Defensa Publica-Charlotte')
 				.openPopup();
 
+			leaflet
+				.marker([-25.30932, -57.666233])
+				.addTo(map)
+				// .bindPopup('Ubicado en zona de riesgo')
+				.on('click', onMarkerClick)
+				.openPopup();
+
 			const zones = getZones();
 
 			zones.forEach((zone) => {
+				console.log(zone, 'HOLAAAAAAAAAAAAAAAAAAAAA');
 				leaflet
 					.polygon(zone.polygons, {
 						color: 'red',
@@ -158,8 +175,74 @@
 						name: zone.name
 					})
 					.addTo(map)
+
 					.bindPopup(zone.name);
 			});
+
+			// Callbacks
+			function onMapClick(e, polygon, map) {
+				let contained = polygon.contains(e.latlng);
+				let message = contained ? 'This is inside the polygon!' : 'This is not inside the polygon.';
+				popup.setLatLng(e.latlng).setContent(message).openOn(map);
+			}
+
+			function onMarkerClick(e) {
+				let contained = polygon.contains(e.latlng);
+				let message = contained
+					? 'This marker is inside the polygon!'
+					: 'This marker is not inside the polygon.';
+				popup.setLatLng(e.latlng).setContent(message).openOn(map);
+			}
+			// Setup
+			// let map = leaflet.map('mapid').setView([51.505, -0.09], 13);
+			leaflet
+				.tileLayer(
+					'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY29uZG9ydGhlZ3JlYXQiLCJhIjoiY2l6MXYwaDQyMDRneDMzcWZ4djRibWdiYiJ9.rbvqKXa9H0axkE3EAPSzgQ',
+					{
+						attribution:
+							'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+						maxZoom: 18,
+						id: 'mapid',
+						accessToken:
+							'pk.eyJ1IjoiY29uZG9ydGhlZ3JlYXQiLCJhIjoiY2l6MXYwaDQyMDRneDMzcWZ4djRibWdiYiJ9.rbvqKXa9H0axkE3EAPSzgQ'
+					}
+				)
+				.addTo(map);
+			let polygon = leaflet
+				.polygon([
+					[-25.3016, -57.6628],
+					[-25.3015, -57.6658],
+					[-25.3031, -57.6673],
+					[-25.3037, -57.6673],
+					[-25.3076, -57.6693],
+					[-25.3127, -57.6708],
+					[-25.3172, -57.6701],
+					[-25.3172, -57.6616],
+					[-25.3138, -57.6621],
+					[-25.3111, -57.6637],
+					[-25.3082, -57.6637],
+					[-25.3055, -57.6642],
+					[-25.3037, -57.664]
+				])
+				.addTo(map);
+
+			let popup = leaflet.popup();
+
+			map.on('click', callback);
+
+			let m1 = leaflet.marker([-25.30932, -57.666233]).addTo(map).on('click', onMarkerClick);
+			console.log(polygon.contains(m1.getLatLng()), 'Esta o no');
+			// let m2 = leaflet.marker([51.506, -0.06]).addTo(map).on('click', onMarkerClick);
+			// let m3 = leaflet.marker([51.505, -0.074]).addTo(map).on('click', onMarkerClick);
+			// let m4 = leaflet.marker([51.51, -0.067]).addTo(map).on('click', onMarkerClick);
+			console.log(polygon.contains(m1.getLatLng()), 'ALSKJDLAKS');
+			// ==> false
+			// console.log(polygon.contains(m2.getLatLng()));
+			// // ==> true
+			// console.log(polygon.contains(m3.getLatLng()));
+			// // ==> false
+			// console.log(polygon.contains(m4.getLatLng()));
+			// ==> true
 		}
 	});
 </script>
