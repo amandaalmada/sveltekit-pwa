@@ -15,7 +15,7 @@
 		});
 	}
 
-	// function inZone(e) {
+	// function checkMarkerIn() {
 	// 	let contained = polygons.contains(e.latlng);
 	// 	let message = contained ? 'This is inside the polygon!' : 'This is not inside the polygon.';
 	// 	popup.setLatLng(e.latlng).setContent(message).openOn(map);
@@ -166,7 +166,7 @@
 			const zones = getZones();
 
 			zones.forEach((zone) => {
-				console.log(zone, 'HOLAAAAAAAAAAAAAAAAAAAAA');
+				console.log();
 				leaflet
 					.polygon(zone.polygons, {
 						color: 'red',
@@ -180,18 +180,18 @@
 			});
 
 			// Callbacks
-			function onMapClick(e, polygon, map) {
-				let contained = polygon.contains(e.latlng);
+			function onMapClick(marker, polygon, map) {
+				let contained = polygon.contains(marker.latlng);
 				let message = contained ? 'This is inside the polygon!' : 'This is not inside the polygon.';
-				popup.setLatLng(e.latlng).setContent(message).openOn(map);
+				popup.setLatLng(marker.latlng).setContent(message).openOn(map);
 			}
 
-			function onMarkerClick(e) {
-				let contained = polygon.contains(e.latlng);
+			function onMarkerClick(marker, polygon, map) {
+				let contained = polygon.contains(marker.latlng);
 				let message = contained
 					? 'This marker is inside the polygon!'
 					: 'This marker is not inside the polygon.';
-				popup.setLatLng(e.latlng).setContent(message).openOn(map);
+				popup.setLatLng(marker.latlng).setContent(message).openOn(map);
 			}
 			// Setup
 			// let map = leaflet.map('mapid').setView([51.505, -0.09], 13);
@@ -208,7 +208,8 @@
 					}
 				)
 				.addTo(map);
-			let polygon = leaflet
+
+			let zona1 = leaflet
 				.polygon([
 					[-25.3016, -57.6628],
 					[-25.3015, -57.6658],
